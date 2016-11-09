@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'adecma18@gmail.com',
-        'name' => 'Admin Generus App',
+        'address' => env('MAIL_ADDRESS', 'exampel@mail.com'),
+        'name' => env('MAIL_NAME', 'Exampel Name'),
     ],
 
     /*
