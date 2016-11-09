@@ -39,7 +39,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <i class="fa fa-address-book"></i> {{ config('app.name', 'Laravel') }}
+                        <i class="fa fa-users"></i> {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 
