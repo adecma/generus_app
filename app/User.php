@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     /**
@@ -26,4 +28,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function kelompoks()
+    {
+        return $this->belongsToMany(Kelompok::class)
+            ->withTimestamps();
+    }
+
+    public function getRolesListAttribute()
+    {
+        return $this->roles->pluck('id')->toArray();
+    } 
+
+    public function getKelompoksListAttribute()
+    {
+        return $this->kelompoks->pluck('id')->toArray();
+    } 
 }
