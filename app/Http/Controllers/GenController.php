@@ -282,7 +282,7 @@ class GenController extends Controller
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->save(public_path('/uploads/avatars/'.$filename));
+                ->save(public_path('uploads/avatars/'.$filename));
 
             $gen->avatar = $filename;
             $gen->save();
