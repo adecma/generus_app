@@ -51,6 +51,10 @@ Route::get('/desa', function(){
 })->middleware('auth', 'role:master');
 
 Route::group(['prefix' => 'desa', 'middleware' => ['auth', 'role:master']], function() {
+
+    Route::get('/generus/toexcel', 'GenController@exportToExcel')->name('generus.toexcel');
+    Route::get('/jurnal/toexcel', 'JurnalController@exportToExcel')->name('jurnal.toexcel');
+
     Route::get('/role/search', 'RoleController@search')->name('role.search');
     Route::resource('/role', 'RoleController', ['except' => 'show']);
 

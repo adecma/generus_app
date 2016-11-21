@@ -9,6 +9,8 @@ use Auth;
 use App\Galeri;
 use Image;
 use File;
+use Excel;
+use DB;
 
 class JurnalController extends Controller
 {
@@ -250,5 +252,24 @@ class JurnalController extends Controller
         session()->flash('notif', '<strong>Alhamdulillah,</strong> datanya telah dihapus <i class="fa fa-smile-o"></i>');
 
         return redirect()->route('jurnal.show', $jurnal_id);
+    }
+
+    public function exportToExcel()
+    {
+        $jurnals = Jurnal::get(['id', 'kegiatan', 'tempat', DB::raw("concat(tg) as tanggal"), 'peserta', 'materi', 'deskripsi']);
+
+        Excel::create('DataJurnalDesaBarat-'.time(), function($excel) use($jurnals) {
+                $excel->setTitle('Data Generus Desa Barat');
+
+                $excel->setCreator('Ade Prast')
+                    ->setCompany('Ade Prast');
+
+                $excel->setDescription('Data jurnal desa barat yang diexport dari Generus App');
+
+                $excel->sheet('JurnalDesaBarat', function($sheet) use($jurnals) {
+                    $sheet->fromArray($jurnals);                        
+                });
+            })
+            ->export('xlsx');
     }
 }

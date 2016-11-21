@@ -8,6 +8,12 @@
 					{!! $label !!}
 						
 					<div class="pull-right">
+						@role('master')
+							<a href="{{ route('generus.toexcel') }}" target="_blank" class="btn btn-warning btn-xs"><i class="fa fa-file-excel-o"></i></a>
+
+							&nbsp;
+						@endrole
+
 						<a href="#" class="btn btn-success btn-xs"><i class="fa fa-bar-chart"></i></a>
 
 						&nbsp;

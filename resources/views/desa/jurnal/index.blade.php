@@ -8,6 +8,12 @@
 					{!! $label !!}
 
 					<div class="pull-right">
+						@role('master')
+							<a href="{{ route('jurnal.toexcel') }}" target="_blank" class="btn btn-warning btn-xs"><i class="fa fa-file-excel-o"></i></a>
+
+							&nbsp;
+						@endrole
+
 						<a href="{{ route('jurnal.create') }}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
 					</div>
 				</div>
@@ -48,7 +54,7 @@
 												<a href="{{ route('jurnal.show', $jurnal->id) }}" class="">{{ $jurnal->kegiatan }}</a> <br>
 												Bertempat di {{ $jurnal->tempat }} <br>
 												Pada tanggal {{ $jurnal->tg->format('d F Y') }} <br>
-												Dihadiri {{ $jurnal->peserta }} generus
+												Dihadiri Insya Allah {{ $jurnal->peserta }} generus
 											</td>
 											<td>
 												{{ $jurnal->user->name }} <br>

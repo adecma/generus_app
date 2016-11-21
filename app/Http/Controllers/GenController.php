@@ -12,6 +12,7 @@ use Auth;
 use App\User;
 use Image;
 use File;
+use Excel;
 
 class GenController extends Controller
 {
@@ -297,6 +298,29 @@ class GenController extends Controller
         session()->flash('notif', '<strong>Alhamdulillah,</strong> fotonya telah diperbaharui <i class="fa fa-smile-o"></i>');
 
         return redirect()->route('generus.show', $gen->id);
+    }
+
+    public function exportToExcel()
+    {
+        $gens = Gen::join('kategoris', 'gens.kategori_id', '=', 'kategoris.id')
+            ->join('kelompoks', 'gens.kelompok_id', '=', 'kelompoks.id')
+            ->orderBy('kelompoks.id', 'asc')
+            ->orderBy('kategoris.id', 'asc')
+            ->get(['gens.id', 'gens.nama_lengkap', 'gens.nama_pendek', 'gens.gender', DB::raw("concat(tg_lahir) as tanggal_lahir"), 'gens.status as school_or_work', 'gens.orang_tua', 'gens.kontak', 'gens.alamat', 'kategoris.nama as kategori', 'kelompoks.nama as kelompok', DB::raw("concat('Desa Barat') as desa")]);
+
+        Excel::create('DataGenerusDesaBarat-'.time(), function($excel) use($gens) {
+                $excel->setTitle('Data Generus Desa Barat');
+
+                $excel->setCreator('Ade Prast')
+                    ->setCompany('Ade Prast');
+
+                $excel->setDescription('Data generus yang diexport dari Generus App');
+
+                $excel->sheet('GenerusDesaBarat', function($sheet) use($gens) {
+                    $sheet->fromArray($gens);                        
+                });
+            })
+            ->export('xlsx');
     }
 
     public function count()
