@@ -27,6 +27,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<h3>Galeri Kegiatan</h3>
+							@if($jurnal->user_id == Auth::user()->id)
 							{!! Form::open(['route' => ['jurnal.galeri', $jurnal->id], 'class' => '', 'enctype' => 'multipart/form-data']) !!}
 								<div class="text-center">
 									<div class="form-group {{ $errors->has('galeri') ? 'has-error' : '' }}">
@@ -54,7 +55,7 @@
 									@endif	
 								</div>														
 							{!! Form::close() !!}
-
+							@endif
 							<hr>							
 						</div>
 					</div>
@@ -67,13 +68,18 @@
 										@foreach($galeri as $foto)
 											<div class="col-xs-4">
 												<img src="/uploads/galeris/{{ $foto->filename }}" style="max-width:100%;, height:auto;display: block;" class="img-thumbnail">
+													
 																								
 													{{ Form::open(['route' => ['jurnal.destroy_galeri', $jurnal->id, $foto->id], 'method' => 'delete', 'class' => 'ask-delete']) }}
 													&nbsp;
 														<p class="text-center">
-															<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i></button> {{ $foto->label }}
+															@if($jurnal->user_id == Auth::user()->id)
+															<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i></button>
+															@endif
+															{{ $foto->label }}
 														</p>
 													{{ Form::close() }}
+													
 											</div>
 										@endforeach
 									</div>							
@@ -90,9 +96,11 @@
 				<div class="panel-footer">
 					<a href="{{ route('jurnal.index') }}" class="btn btn-default btn-sm">Kembali</a>
 
+					@if($jurnal->user_id == Auth::user()->id)
 					<div class="pull-right">
 						<a href="{{ route('jurnal.edit', $jurnal->id) }}" class="btn btn-info btn-sm">Edit</a>
 					</div>
+					@endif
 				</div>
 			</div>
 		</div>
