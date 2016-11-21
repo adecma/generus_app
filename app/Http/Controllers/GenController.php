@@ -11,6 +11,7 @@ use DB;
 use Auth;
 use App\User;
 use Image;
+use File;
 
 class GenController extends Controller
 {
@@ -24,7 +25,7 @@ class GenController extends Controller
 
         $this->middleware('permission:manage-generus|read-generus')->only(['index', 'show', 'search']);
 
-        $this->middleware('permission:manage-generus')->only(['create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('permission:manage-generus')->only(['create', 'store', 'edit', 'update', 'destroy', 'update_avatar']);
     }
 
     /**
@@ -87,7 +88,7 @@ class GenController extends Controller
             'gender' => 'required|in:Laki,Perempuan',
             'kelompok_id' => 'required',
             'kategori_id' => 'required',
-            'kontak' => 'numeric|digits_between:10,13|unique:gens,kontak',
+            'kontak' => 'numeric|digits_between:10,13',
             'tg_lahir' => 'required|date',
         ]);
 
@@ -170,7 +171,7 @@ class GenController extends Controller
             'gender' => 'required|in:Laki,Perempuan',
             'kelompok_id' => 'required',
             'kategori_id' => 'required',
-            'kontak' => 'numeric|digits_between:10,13|unique:gens,kontak,'.$gen->id,
+            'kontak' => 'numeric|digits_between:10,13',
             'tg_lahir' => 'required|date',
         ]);
 
@@ -267,6 +268,8 @@ class GenController extends Controller
     {
         $gen = Gen::findOrFail($id);
 
+        $old_filename = $gen->avatar;
+
         $this->validate($request, [
             'avatar' => 'required|mimes:jpeg'
         ]);
@@ -274,11 +277,22 @@ class GenController extends Controller
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $filename = $gen->id.'-'.time().'.'.$avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/avatars/'.$filename));
+            Image::make($avatar)
+                ->resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->save(public_path('/uploads/avatars/'.$filename));
 
             $gen->avatar = $filename;
             $gen->save();
+
+            if ($old_filename != 'no_avatar.png') {
+                File::delete('uploads/avatars/'.$old_filename);
+            }
         }
+
+
 
         session()->flash('notif', '<strong>Alhamdulillah,</strong> fotonya telah diperbaharui <i class="fa fa-smile-o"></i>');
 

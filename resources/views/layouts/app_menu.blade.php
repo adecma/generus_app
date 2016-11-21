@@ -16,4 +16,5 @@
 
 @role(['master', 'kelompok', 'viewer'])
     <li><a href="{{ route('generus.index') }}">Generus</a></li>
+    <li><a href="{{ route('jurnal.index') }}">Jurnal</a></li>
 @endrole

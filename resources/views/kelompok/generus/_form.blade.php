@@ -56,7 +56,21 @@
 
 		@if($errors->has('tg_lahir'))
 			<span class="help-block">
-				{{ $errors->first('gender') }}
+				{{ $errors->first('tg_lahir') }}
+			</span>
+		@endif
+	</div>
+</div>
+
+<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
+	{{ Form::label('status', 'Pendidikan / Pekerjaan', ['class' => 'control-label col-sm-4']) }}
+	
+	<div class="col-sm-6">
+		{{ Form::text('status', null, ['class' => 'form-control', 'placeholder' => 'Status lengkap pendidikan / pekerjaan', 'autocomplete' =>'off']) }}
+		
+		@if($errors->has('status'))
+			<span class="help-block">
+				{{ $errors->first('status') }}
 			</span>
 		@endif
 	</div>
@@ -127,20 +141,6 @@
 		@if($errors->has('kontak'))
 			<span class="help-block">
 				{{ $errors->first('kontak') }}
-			</span>
-		@endif
-	</div>
-</div>
-
-<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-	{{ Form::label('status', 'Pendidikan / Pekerjaan', ['class' => 'control-label col-sm-4']) }}
-	
-	<div class="col-sm-6">
-		{{ Form::text('status', null, ['class' => 'form-control', 'placeholder' => 'Status lengkap pendidikan / pekerjaan', 'autocomplete' =>'off']) }}
-		
-		@if($errors->has('status'))
-			<span class="help-block">
-				{{ $errors->first('status') }}
 			</span>
 		@endif
 	</div>

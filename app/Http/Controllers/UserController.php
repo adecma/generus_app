@@ -60,7 +60,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:6',
+            'name' => 'required|min:4',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6'
         ]);
@@ -120,7 +120,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
          $this->validate($request, [
-            'name' => 'required|min:6',
+            'name' => 'required|min:4',
             'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
 

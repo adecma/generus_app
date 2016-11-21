@@ -35,6 +35,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function jurnals()
+    {
+        return $this->hasMany('App\Jurnal');
+    }
+
     public function getRolesListAttribute()
     {
         return $this->roles->pluck('id')->toArray();

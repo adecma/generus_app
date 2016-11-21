@@ -38,6 +38,12 @@ Route::group(['prefix' => 'kelompok', 'middleware' => ['auth', 'role:kelompok|vi
 	Route::get('/generus/count', 'GenController@count')->name('generus.count');
     Route::post('/generus/{generus}/avatar', 'GenController@update_avatar')->name('generus.avatar');
     Route::resource('/generus', 'GenController');
+
+
+    Route::post('/jurnal/{jurnal}/galeri', 'JurnalController@store_galeri')->name('jurnal.galeri');
+    Route::delete('/jurnal/{jurnal}/galeri/{galeri}', 'JurnalController@destroy_galeri')->name('jurnal.destroy_galeri');
+    Route::get('/jurnal/search', 'JurnalController@search')->name('jurnal.search');
+    Route::resource('/jurnal', 'JurnalController');
 });
 
 Route::get('/desa', function(){

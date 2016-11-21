@@ -47,7 +47,7 @@
 						</div>
 
 						<div class="col-sm-4">
-							<img src="/uploads/avatars/{{ $gen->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;" alt="{{ $gen->nama_lengkap }}" >
+							<img src="/uploads/avatars/{{ $gen->avatar }}" style="max-width:100%;, height:auto;display: block;" class="img-thumbnail" alt="{{ $gen->nama_lengkap }}" >
 							{!! Form::open(['route' => ['generus.avatar', $gen->id], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 								<div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
 									{{ Form::file('avatar') }}
