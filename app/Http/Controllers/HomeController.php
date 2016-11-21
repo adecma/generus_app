@@ -66,7 +66,7 @@ class HomeController extends Controller
      */
     public function profile()
     {
-        $user = User::select(['id', 'name', 'email', 'created_at', 'updated_at'])->findOrFail(Auth::user()->id);
+        $user = User::select(['id', 'name', 'email', 'created_at', 'updated_at', 'last_logged_in_at'])->findOrFail(Auth::user()->id);
 
         return view('profile.profile', compact('user'));
     }

@@ -13,8 +13,8 @@
 							<dd>{{ $user->email }}</dd>
 							<dt>Dibuat</dt>
 							<dd>{{ $user->created_at->diffForHumans() }}</dd>
-							<dt>Diperbaharui</dt>
-							<dd>{{ $user->updated_at->diffForHumans() }}</dd>
+							<dt>Logged In</dt>
+							<dd>{{ $user->last_logged_in_at->diffForHumans() }}</dd>
 							<dt>Akses</dt>
 							<dd>
 								@if($user->kelompoks)

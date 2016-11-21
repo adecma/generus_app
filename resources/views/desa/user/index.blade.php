@@ -40,7 +40,6 @@
 										<th>Role</th>
 										<th>Akses</th>
 										<th>Logged In</th>
-										<th>Updated</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -65,7 +64,6 @@
 											<td>
 												{{ is_null($user->last_logged_in_at) ? 'Nothing' : $user->last_logged_in_at->diffForHumans() }}
 											</td>
-											<td>{{ $user->updated_at->diffForHumans() }}</td>
 											<td>
 												{{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'delete', 'class' => 'ask-delete']) }}
 													<a href="{{ route('user.edit', $user->id) }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></a>
