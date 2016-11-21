@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					{!! $label !!}
@@ -39,6 +39,7 @@
 										<th>Email</th>
 										<th>Role</th>
 										<th>Akses</th>
+										<th>Logged In</th>
 										<th>Updated</th>
 										<th>Aksi</th>
 									</tr>
@@ -60,6 +61,9 @@
 												@foreach($user->kelompoks as $kelompok)
 													<span class="label label-success">{{ $kelompok->nama }}</span>
 												@endforeach
+											</td>
+											<td>
+												{{ is_null($user->last_logged_in_at) ? 'Nothing' : $user->last_logged_in_at->diffForHumans() }}
 											</td>
 											<td>{{ $user->updated_at->diffForHumans() }}</td>
 											<td>
