@@ -225,7 +225,7 @@ class JurnalController extends Controller
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->save(public_path('/uploads/galeris/'.$filename));
+                ->save(public_path('uploads/galeris/'.$filename));
 
             $galeri = new Galeri;
             $galeri->filename = $filename;
