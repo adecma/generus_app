@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <i class="fa fa-users"></i>&nbsp;Pemuda App
+                    <i class="fa fa-users"></i>&nbsp;Generus App
                 </div>
             </div>
         </div>
