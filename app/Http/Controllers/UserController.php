@@ -165,7 +165,7 @@ class UserController extends Controller
                 ->orWhere('email', 'like', '%'.$request->input('cari').'%')
                 ->paginate(30);
 
-            $users->setPath('search?q='.$request->input('cari'));
+            $users->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

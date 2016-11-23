@@ -141,7 +141,7 @@ class KategoriController extends Controller
                 ->orWhere('keterangan', 'like', '%'.$request->input('cari').'%')
                 ->paginate(30);
 
-            $kategoris->setPath('search?q='.$request->input('cari'));
+            $kategoris->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

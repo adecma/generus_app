@@ -147,7 +147,7 @@ class PermissionController extends Controller
                 ->orWhere('description', 'like', '%'.$request->input('cari').'%')
                 ->paginate(30);
 
-            $permissions->setPath('search?q='.$request->input('cari'));
+            $permissions->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

@@ -152,7 +152,7 @@ class KelompokController extends Controller
                 ->orWhere('alamat', 'like', '%'.$request->input('cari').'%')
                 ->paginate(30);
 
-            $kelompoks->setPath('search?q='.$request->input('cari'));
+            $kelompoks->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

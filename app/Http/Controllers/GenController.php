@@ -242,7 +242,7 @@ class GenController extends Controller
                 })
                 ->paginate(30);
 
-            $gens->setPath('search?q='.$request->input('cari'));
+            $gens->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

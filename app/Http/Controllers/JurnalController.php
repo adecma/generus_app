@@ -187,7 +187,7 @@ class JurnalController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->paginate(30);
 
-            $jurnals->setPath('search?q='.$request->input('cari'));
+            $jurnals->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {

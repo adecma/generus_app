@@ -155,7 +155,7 @@ class RoleController extends Controller
                 ->orWhere('description', 'like', '%'.$request->input('cari').'%')
                 ->paginate(30);
 
-            $roles->setPath('search?q='.$request->input('cari'));
+            $roles->setPath('search?cari='.$request->input('cari'));
 
             if ($request->exists('page'))
             {
