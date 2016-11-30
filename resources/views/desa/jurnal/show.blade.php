@@ -12,7 +12,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<h3>Kegiatan</h3>
-							{{ $jurnal->kegiatan }} Bertempat di {{ $jurnal->tempat }}. Dilaksanakan pada tanggal {{ $jurnal->tg->format('d F Y') }} dan dihadiri Insya Allah {{ $jurnal->peserta }} generus.
+							{{ $jurnal->kegiatan }} oleh {{ $jurnal->oleh }}, bertempat di {{ $jurnal->tempat }}. Dilaksanakan pada tanggal {{ $jurnal->tg->format('d F Y') }} dan dihadiri Insya Allah {{ $jurnal->peserta }} generus.
 						</div>
 						<div class="col-sm-4">
 							<h3>Materi</h3>

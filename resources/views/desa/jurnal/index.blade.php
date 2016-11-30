@@ -52,6 +52,7 @@
 											<td>{{ $no++ }}</td>
 											<td>
 												<a href="{{ route('jurnal.show', $jurnal->id) }}" class="">{{ $jurnal->kegiatan }}</a> <br>
+												Oleh {{ $jurnal->oleh }} <br>
 												Bertempat di {{ $jurnal->tempat }} <br>
 												Pada tanggal {{ $jurnal->tg->format('d F Y') }} <br>
 												Dihadiri Insya Allah {{ $jurnal->peserta }} generus

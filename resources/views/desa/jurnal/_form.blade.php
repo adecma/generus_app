@@ -12,6 +12,20 @@
 	</div>
 </div>
 
+<div class="form-group {{ $errors->has('oleh') ? 'has-error' : '' }}">
+	{{ Form::label('oleh', 'Oleh', ['class' => 'control-label col-sm-4']) }}
+
+	<div class="col-sm-6">
+		{{ Form::select('oleh', $oleh, null, ['class' => 'form-control', 'placeholder' => 'Pilih kelompok/desa']) }}
+
+		@if($errors->has('oleh'))
+			<span class="help-block">
+				{{ $errors->first('oleh') }}
+			</span>
+		@endif
+	</div>
+</div>
+
 <div class="form-group {{ $errors->has('tempat') ? 'has-error' : '' }}">
 	{{ Form::label('tempat', 'Tempat', ['class' => 'control-label col-sm-4']) }}
 	

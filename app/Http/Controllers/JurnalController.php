@@ -60,7 +60,12 @@ class JurnalController extends Controller
      */
     public function create()
     {
-        return view('desa.jurnal.create');
+        $oleh = Auth::user()->kelompoks->pluck('nama', 'nama');
+        if (Auth::user()->hasRole('master')) {
+            $oleh->prepend('Desa Barat', 'Desa Barat');
+        }
+
+        return view('desa.jurnal.create', compact('oleh'));
     }
 
     /**
@@ -74,6 +79,7 @@ class JurnalController extends Controller
         $this->validate($request, [
             'kegiatan' => 'required',
             'tempat' => 'required',
+            'oleh' => 'required',
             'tg' => 'required|date',
             'peserta' => 'required|numeric',
             'materi' => 'required',
@@ -83,6 +89,7 @@ class JurnalController extends Controller
         $jurnal = new jurnal;
         $jurnal->kegiatan = $request->input('kegiatan');
         $jurnal->tempat = $request->input('tempat');
+        $jurnal->oleh = $request->input('oleh');
         $jurnal->tg = $request->input('tg');
         $jurnal->peserta = $request->input('peserta');
         $jurnal->materi = $request->input('materi');
@@ -120,7 +127,12 @@ class JurnalController extends Controller
     {
         $jurnal = Jurnal::findOrFail($id);
 
-        return view('desa.jurnal.edit', compact('jurnal'));
+        $oleh = Auth::user()->kelompoks->pluck('nama', 'nama');
+        if (Auth::user()->hasRole('master')) {
+            $oleh->prepend('Desa Barat', 'Desa Barat');
+        }
+
+        return view('desa.jurnal.edit', compact('jurnal', 'oleh'));
     }
 
     /**
@@ -137,6 +149,7 @@ class JurnalController extends Controller
         $this->validate($request, [
             'kegiatan' => 'required',
             'tempat' => 'required',
+            'oleh' => 'required',
             'tg' => 'required|date',
             'peserta' => 'required|numeric',
             'materi' => 'required',
@@ -145,6 +158,7 @@ class JurnalController extends Controller
 
         $jurnal->kegiatan = $request->input('kegiatan');
         $jurnal->tempat = $request->input('tempat');
+        $jurnal->oleh = $request->input('oleh');
         $jurnal->tg = $request->input('tg');
         $jurnal->peserta = $request->input('peserta');
         $jurnal->materi = $request->input('materi');
@@ -182,6 +196,7 @@ class JurnalController extends Controller
                 })
                 ->orWhere('kegiatan', 'like', '%'.$request->input('cari').'%')
                 ->orWhere('tempat', 'like', '%'.$request->input('cari').'%')
+                ->orWhere('oleh', 'like', '%'.$request->input('cari').'%')
                 ->orWhere('materi', 'like', '%'.$request->input('cari').'%')
                 ->orWhere('deskripsi', 'like', '%'.$request->input('cari').'%')
                 ->orderBy('updated_at', 'desc')
@@ -256,7 +271,7 @@ class JurnalController extends Controller
 
     public function exportToExcel()
     {
-        $jurnals = Jurnal::get(['id', 'kegiatan', 'tempat', DB::raw("concat(tg) as tanggal"), 'peserta', 'materi', 'deskripsi']);
+        $jurnals = Jurnal::get(['id', 'kegiatan', 'oleh', 'tempat', DB::raw("concat(tg) as tanggal"), 'peserta', 'materi', 'deskripsi']);
 
         Excel::create('DataJurnalDesaBarat-'.time(), function($excel) use($jurnals) {
                 $excel->setTitle('Data Generus Desa Barat');
